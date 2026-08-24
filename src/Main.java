@@ -4,36 +4,37 @@ public class Main {
 
 
 
-        PedidoComida pedidoComida = new PedidoComida(
+        Pedido pedidoComida = new PedidoComida(
                 "3241",
                 "Pajaritos, La Cisterna",
-                "Comida"
+                "1"
         );
 
 
-        PedidoEncomienda pedidoEncomienda = new PedidoEncomienda(
+
+        Pedido pedidoEncomienda = new PedidoEncomienda(
                 "8001",
                 "Los Leones 314",
-                "Encomienda"
+                "4"
 
         );
 
-        PedidoExpress pedidoExpress = new PedidoExpress(
+        Pedido pedidoExpress = new PedidoExpress(
                 "5410",
                 "Cienfuegos 31, Los Heroes",
-                "Express"
+                "2"
         );
 
-        pedidoComida.asignarRepartidor();
-        pedidoComida.asignarRepartidor("Felipe Gonzales");
 
-        pedidoEncomienda.asignarRepartidor();
-        pedidoEncomienda.asignarRepartidor("Maria Soto");
-
-        pedidoExpress.asignarRepartidor();
-        pedidoExpress.asignarRepartidor("Juan Lopez");
+        pedidoComida.mostrarResumen();
+        pedidoComida.calcularTiempoEntrega();
 
 
+        pedidoEncomienda.mostrarResumen();
+        pedidoEncomienda.calcularTiempoEntrega();
+
+        pedidoExpress.mostrarResumen();
+        pedidoExpress.calcularTiempoEntrega();
 
     }
 

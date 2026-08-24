@@ -2,26 +2,17 @@ public class PedidoEncomienda extends Pedido{
 
 
 
-    public PedidoEncomienda (String idPedido, String direccionEntrega, String tipoPedido){
+    public PedidoEncomienda (String idPedido, String direccionEntrega, String distanciaKM){
 
-        super(idPedido,direccionEntrega,tipoPedido);
+        super(idPedido,direccionEntrega,distanciaKM);
 
     }
-
 
     @Override
-    public void asignarRepartidor(){
-        super.asignarRepartidor();
+    public void calcularTiempoEntrega() {
 
-        System.out.println("Este pedido es de documentos y paquetes");
+        double tiempo = 20 + (1.5 * Integer.parseInt(getDistanciaKM()));
+        System.out.println("Tiempo entrega: " + tiempo + "min");
 
     }
-
-
-    @Override
-    public void asignarRepartidor(String nombreRepartidor){
-        super.asignarRepartidor(nombreRepartidor);
-        System.out.println("Validacion de peso y embalaje -> OK");
-    }
-
 }

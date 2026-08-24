@@ -1,30 +1,63 @@
-public  class Pedido {
+public abstract class Pedido {
 
     private String idPedido;
     private String direccionEntrega;
-    private String tipoPedido;
+    private String distanciaKM;
 
 
+    //CONSTRUCTOR
 
-    public Pedido (String idPedido, String direccionEntrega, String tipoPedido){
+    public Pedido (String idPedido, String direccionEntrega, String distanciaKM){
         this.idPedido = idPedido;
         this.direccionEntrega = direccionEntrega;
-        this.tipoPedido = tipoPedido;
+        this.distanciaKM = distanciaKM;
     }
 
+    //GETTERS
+
+    public String getIdPedido() {
+        return idPedido;
+    }
+
+    public String getDireccionEntrega() {
+        return direccionEntrega;
+    }
+
+    public String getDistanciaKM() {
+        return distanciaKM;
+    }
+
+    //SETTERS
+
+    public void setDireccionEntrega(String direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
+    }
+
+    public void setIdPedido(String idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public void setDistanciaKM(String distanciaKM) {
+        this.distanciaKM = distanciaKM;
+    }
+
+    //METODO ABSTRACTO
+
+    public abstract void calcularTiempoEntrega();
 
 
-    public void asignarRepartidor(){
-        System.out.println("Repartidor con ID: " + idPedido +
-                "\nDireccion de entrega: " + direccionEntrega +
-                "\nTipo pedido: " + tipoPedido
+    public void mostrarResumen() {
+        System.out.println(
+                "======== RESUMEN PEDIDO ========" +
+                        "\nID pedido: " + idPedido +
+                        "\nDirreccion entrega: " + direccionEntrega +
+                        "\nDistancia en KM: " + distanciaKM
         );
     }
 
 
-    public void asignarRepartidor(String nombreRepartidor){
-        System.out.println("Pedido asignado a: " + nombreRepartidor);
-    }
+
+
 
 
 
