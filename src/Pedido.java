@@ -1,4 +1,7 @@
-public abstract class Pedido {
+import java.util.ArrayList;
+import java.util.Objects;
+
+public abstract class Pedido extends ControladorDeEnvios {
 
     private String idPedido;
     private String direccionEntrega;
@@ -44,6 +47,59 @@ public abstract class Pedido {
     //METODO ABSTRACTO
 
     public abstract void calcularTiempoEntrega();
+
+
+    //OVERRIDE
+
+
+    public void asignarRepartidor(){
+        System.out.println("El pedido ha sido asignado");
+    }
+
+    //OVERRIDING
+
+    public void asignarRepartidor(String nombre){
+
+        System.out.println("Pedido asignado a: " + nombre);
+
+    }
+
+
+    //INTERFACES
+
+
+    @Override
+    public void despachar() {
+        System.out.println("El pedido fue despachado correctamente");
+    }
+
+
+    @Override
+    public void cancelar(ArrayList<Pedido> list, String id) {
+
+        for(int i = 0 ; i < list.size(); i++){
+            if(list.get(i).getIdPedido() == id){
+                list.remove(i);
+                break;
+            }
+        }
+
+        System.out.println("Pedido cancelado correctamente");
+
+    }
+
+    @Override
+    public void verHistorial(ArrayList<Pedido> list) {
+
+        for (int i = 0 ; i < list.size(); i++){
+            System.out.println("Pedido: " + list.get(i).getIdPedido() + "entregado por - "  );
+        }
+
+
+    }
+
+
+
 
 
     public void mostrarResumen() {

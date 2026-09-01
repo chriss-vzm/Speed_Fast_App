@@ -1,4 +1,4 @@
-public class PedidoEncomienda extends Pedido{
+public class PedidoEncomienda extends Pedido {
 
 
 
@@ -6,6 +6,20 @@ public class PedidoEncomienda extends Pedido{
 
         super(idPedido,direccionEntrega,distanciaKM);
 
+    }
+
+
+
+
+    @Override
+    public void asignarRepartidor() {
+        System.out.println("El pedido ha sido asignado de tipo ENCOMIENDA");
+    }
+
+    @Override
+    public void asignarRepartidor(String nombre) {
+        super.asignarRepartidor(nombre);
+        System.out.println("Validando peso y embalaje: OK");
     }
 
     @Override
