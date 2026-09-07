@@ -1,7 +1,7 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +10,27 @@ public class Main {
 
 
         ArrayList<Pedido> arregloPedidos = new ArrayList<>();
-        BlockingQueue<Pedido> colaPedidos  = new LinkedBlockingQueue<>(5);
+        BlockingQueue<Pedido> colaPedidos  = new LinkedBlockingQueue<>(3);
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+
+
+        //CREACION DE REPARTIDORES
+
+
+        ArrayList<String> nombres = new ArrayList<>();
+
+
+        nombres.add("Felipe Gonzales");
+        nombres.add("Maria Sepulveda");
+        nombres.add("Juan Lopez");
+
+        Random random = new Random();
+
+
+        String nombre1 = nombres.remove(random.nextInt(nombres.size()));
+        String nombre2 = nombres.remove(random.nextInt(nombres.size()));
+        String nombre3 = nombres.remove(random.nextInt(nombres.size()));
+
 
 
 
@@ -66,52 +86,14 @@ public class Main {
 
 
 
+        executor.execute(new ProductorPedidos(arregloPedidos,colaPedidos));
 
-        pedidoComida.asignarRepartidor("Juan Perez");
-        System.out.println(pedidoComida);
-        pedidoComida.calcularTiempoEntrega();
-        pedidoComida.despachar();
-
-
+        executor.execute(new Repartidor(colaPedidos,nombre1));
+        executor.execute(new Repartidor(colaPedidos,nombre2));
+        executor.execute(new Repartidor(colaPedidos,nombre3));
 
 
-
-        System.out.println("Ingrese nombre repartidor para pedido de tipo ENCOMIENDA: ");
-        String r1 = sc.nextLine();
-
-        pedidoEncomienda.asignarRepartidor(r1);
-        System.out.println(pedidoEncomienda);
-        pedidoEncomienda.calcularTiempoEntrega();
-        pedidoEncomienda.despachar();
-
-
-
-        System.out.println("Ingrese nombre repartidor para pedido de tipo EXPRESS: ");
-        String r2 = sc.nextLine();
-
-        pedidoExpress.asignarRepartidor(r2);
-        System.out.println(pedidoExpress);
-        pedidoExpress.calcularTiempoEntrega();
-        pedidoExpress.despachar();
-
-
-
-
-        pedidoComida.verHistorial(arregloPedidos);
-
-
-
-
-
-
-        ProductorPedidos productorPedidos = new ProductorPedidos(arregloPedidos,colaPedidos);
-        Repartidor repartidor1 = new Repartidor(colaPedidos);
-        Repartidor repartidor2 = new Repartidor(colaPedidos);
-
-
-
-
-
+       executor.shutdown();
 
 
 

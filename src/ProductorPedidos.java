@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -33,6 +32,5 @@ public class ProductorPedidos implements Runnable{
         }
 
     }
-
 
 }

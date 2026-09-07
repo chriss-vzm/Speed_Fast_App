@@ -1,15 +1,18 @@
-import java.time.Period;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Repartidor implements Runnable{
 
     BlockingQueue<Pedido> listaPedidos = new LinkedBlockingQueue<>();
+    String nombreRepartidor;
 
 
-    public Repartidor(BlockingQueue<Pedido> listaPedidos){
+    public Repartidor(BlockingQueue<Pedido> listaPedidos, String nombreRepartidor){
 
         this.listaPedidos = listaPedidos;
+        this.nombreRepartidor = nombreRepartidor;
+
 
     }
 
@@ -18,12 +21,29 @@ public class Repartidor implements Runnable{
     @Override
     public void run() {
 
-        try {
-            listaPedidos.take();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        while(!listaPedidos.isEmpty()){
 
+            try {
+
+                Pedido pedido = listaPedidos.take();
+
+                System.out.println("Repartidor |" + nombreRepartidor + "| entregando pedido |" + pedido.getIdPedido() + "|");
+
+                Random random = new Random();
+                int delay = random.nextInt(3000) + 1000;
+
+                Thread.sleep(delay);
+
+                System.out.println("Pedido |" + pedido.getIdPedido() + "| entregado.");
+
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+
+
+        }
 
     }
 }
