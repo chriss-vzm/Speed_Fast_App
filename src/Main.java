@@ -28,7 +28,7 @@ public class Main {
                 "Comida",
                 "#103",
                 "San Isidro, Santiago Centro",
-                "1"
+                "3"
         );
 
 
@@ -37,6 +37,14 @@ public class Main {
                 "#101",
                 "Los Leones 314",
                 "4"
+
+        );
+
+        Pedido pedidoEncomienda2 = new PedidoEncomienda(
+                "Encomienda",
+                "#104",
+                "Av.Tobalaba 989",
+                "3"
 
         );
 
@@ -52,6 +60,7 @@ public class Main {
         arregloPedidos.add(pedidoComida);
         arregloPedidos.add(pedidoComida2);
         arregloPedidos.add(pedidoEncomienda);
+        arregloPedidos.add(pedidoEncomienda2);
         arregloPedidos.add(pedidoExpress);
 
 
