@@ -1,110 +1,77 @@
-# SpeedFast - Sistema de Gestión de Pedidos
+# SpeedFast App
 
 ## Descripción
 
-SpeedFast es una aplicación desarrollada en Java que simula la asignación de repartidores para una empresa de reparto a domicilio.
+SpeedFast es una aplicación desarrollada en Java para simular el funcionamiento de una empresa de reparto de pedidos.
 
-El sistema trabaja con diferentes tipos de pedidos y utiliza Programación Orientada a Objetos para representar el comportamiento específico de cada uno.
+El sistema permite trabajar con distintos tipos de pedidos y simular la entrega de estos mediante programación concurrente, utilizando hilos y `ExecutorService`.
 
-Los tipos de pedidos implementados son:
+## Tipos de pedidos
 
-* Pedido de comida.
-* Pedido de encomienda.
-* Pedido express.
+El programa contempla los siguientes tipos de pedidos:
 
-Cada tipo de pedido posee diferentes requisitos al momento de asignar un repartidor.
+- Pedido de comida
+- Pedido de encomienda
+- Pedido express
 
-## Objetivo
+Todos ellos heredan de la clase abstracta `Pedido`.
 
-El objetivo del proyecto es aplicar conceptos de Programación Orientada a Objetos en Java, principalmente:
+## Estructura del proyecto
 
-* Herencia.
-* Polimorfismo.
-* Sobreescritura de métodos.
-* Sobrecarga de métodos.
-* Encapsulamiento.
+El proyecto está compuesto por las siguientes clases e interfaces:
 
-## Estructura de clases
+### Clases
 
-### Pedido
+- `Pedido`: clase abstracta que representa un pedido.
+- `PedidoComida`: representa pedidos de comida.
+- `PedidoEncomienda`: representa pedidos de encomienda.
+- `PedidoExpress`: representa pedidos express.
+- `ProductorPedidos`: obtiene los pedidos almacenados y los incorpora a una `BlockingQueue`.
+- `Repartidor`: representa a un repartidor y ejecuta las entregas mediante `Runnable`.
+- `Main`: clase principal encargada de crear los pedidos, repartidores y ejecutar las tareas concurrentes.
 
-Clase base del sistema.
+### Interfaces
 
-Contiene los atributos generales de un pedido:
+- `Despachable`
+- `Cancelable`
+- `Rastreable`
 
-* `idPedido`
-* `direccionEntrega`
-* `tipoPedido`
+## Concurrencia
 
-También contiene las diferentes versiones del método `asignarRepartidor()`.
+Para la simulación de las entregas se utilizan herramientas de concurrencia de Java:
 
-### PedidoComida
+- `Runnable`
+- `Thread`
+- `BlockingQueue`
+- `LinkedBlockingQueue`
+- `ExecutorService`
+- `Thread.sleep()`
+- `Random`
 
-Clase derivada de `Pedido`.
+Los pedidos son almacenados inicialmente en un `ArrayList` y posteriormente son incorporados a una `BlockingQueue` mediante `ProductorPedidos`.
 
-Implementa la lógica correspondiente a pedidos de comida, verificando que el repartidor cuente con mochila térmica.
+Los repartidores toman los pedidos desde la cola y simulan su proceso de entrega.
 
-### PedidoEncomienda
+El programa utiliza `ExecutorService` para ejecutar simultáneamente al productor y a los distintos repartidores.
 
-Clase derivada de `Pedido`.
-
-Implementa la lógica correspondiente al reparto de encomiendas, realizando la validación de peso y embalaje.
-
-### PedidoExpress
-
-Clase derivada de `Pedido`.
-
-Implementa la lógica correspondiente a compras express, buscando un repartidor cercano con disponibilidad inmediata.
-
-## Sobreescritura
-
-Las clases derivadas sobrescriben el método:
-
-```java
-asignarRepartidor()
-```
-
-mediante `@Override`, permitiendo que cada tipo de pedido tenga un comportamiento específico.
-
-## Sobrecarga
-
-El proyecto también utiliza una versión sobrecargada del método:
-
-```java
-asignarRepartidor(String nombreRepartidor)
-```
-
-Esta versión permite indicar el nombre del repartidor que será asignado al pedido.
-
-## Ejemplo de uso
-
-```java
-PedidoComida comida = new PedidoComida(
-        101,
-        "Av. Providencia 1234",
-        "Comida"
-);
-
-comida.asignarRepartidor();
-comida.asignarRepartidor("Juan Pérez");
-```
-
-## Ejemplo de salida
+## Flujo del programa
 
 ```text
-[Pedido Comida]
-Asignando repartidor...
-Verificando mochila térmica... OK
-Pedido asignado a Juan Pérez
-```
-
-## Tecnologías utilizadas
-
-* Java
-* IntelliJ IDEA
-* Git
-* GitHub
-
-## Autor
-
-Christopher Zúñiga
+ArrayList<Pedido>
+       |
+       v
+ProductorPedidos
+       |
+       | put()
+       v
+BlockingQueue<Pedido>
+       |
+       +----------+----------+
+       |          |          |
+       v          v          v
+Repartidor 1  Repartidor 2  Repartidor 3
+       |          |          |
+       +----------+----------+
+                  |
+                  v
+          Ejecución concurrente
