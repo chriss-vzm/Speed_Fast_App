@@ -14,13 +14,22 @@ public class Main {
         //CREACION DE PEDIDOS
 
         Pedido pedidoComida = new PedidoComida(
+                "Comida",
                 "#100",
                 "Pajaritos, La Cisterna",
                 "1"
         );
 
+        Pedido pedidoComida2 = new PedidoComida(
+                "Comida",
+                "#103",
+                "San Isidro, Santiago Centro",
+                "1"
+        );
+
 
         Pedido pedidoEncomienda = new PedidoEncomienda(
+                "Encomienda",
                 "#101",
                 "Los Leones 314",
                 "4"
@@ -28,6 +37,7 @@ public class Main {
         );
 
         Pedido pedidoExpress = new PedidoExpress(
+                "Express",
                 "#102",
                 "Cienfuegos 31, Los Heroes",
                 "2"
@@ -36,6 +46,7 @@ public class Main {
 
 
         arregloPedido.add(pedidoComida);
+        arregloPedido.add(pedidoComida2);
         arregloPedido.add(pedidoEncomienda);
         arregloPedido.add(pedidoExpress);
 
@@ -43,41 +54,51 @@ public class Main {
 
 
 
-
-        //ASIGNACION DE REPARTIDORES AUTOMATICOS
-
         pedidoComida.asignarRepartidor("Juan Perez");
+        System.out.println(pedidoComida);
+        pedidoComida.calcularTiempoEntrega();
+        pedidoComida.despachar();
 
-        //ASIGNACION DE REPARTIDORES MANUAL
+
+
+
 
         System.out.println("Ingrese nombre repartidor para pedido de tipo ENCOMIENDA: ");
         String r1 = sc.nextLine();
 
-        System.out.println("Ingrese nombre repartidor para pedido de tipo EXPRESS: ");
-        String r2 = sc.nextLine();
-
         pedidoEncomienda.asignarRepartidor(r1);
-        pedidoExpress.asignarRepartidor(r2);
-
-
-
-
-        pedidoComida.mostrarResumen();
-        pedidoComida.calcularTiempoEntrega();
-        pedidoComida.despachar();
-
-        pedidoEncomienda.mostrarResumen();
+        System.out.println(pedidoEncomienda);
         pedidoEncomienda.calcularTiempoEntrega();
         pedidoEncomienda.despachar();
 
 
-        pedidoExpress.mostrarResumen();
+
+        System.out.println("Ingrese nombre repartidor para pedido de tipo EXPRESS: ");
+        String r2 = sc.nextLine();
+
+        pedidoExpress.asignarRepartidor(r2);
+        System.out.println(pedidoExpress);
         pedidoExpress.calcularTiempoEntrega();
         pedidoExpress.despachar();
 
 
 
-        pedidoComida.cancelar(arregloPedido,"#100");
+
+        pedidoComida.verHistorial(arregloPedido);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

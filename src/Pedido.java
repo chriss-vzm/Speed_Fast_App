@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class Pedido extends ControladorDeEnvios {
+public abstract class Pedido implements Despachable, Cancelable, Rastreable{
 
+    private String tipoPeido;
     private String idPedido;
     private String direccionEntrega;
     private String distanciaKM;
@@ -10,13 +11,19 @@ public abstract class Pedido extends ControladorDeEnvios {
 
     //CONSTRUCTOR
 
-    public Pedido (String idPedido, String direccionEntrega, String distanciaKM){
+    public Pedido (String tipoPeido,String idPedido, String direccionEntrega, String distanciaKM){
+        this.tipoPeido = tipoPeido;
         this.idPedido = idPedido;
         this.direccionEntrega = direccionEntrega;
         this.distanciaKM = distanciaKM;
     }
 
     //GETTERS
+
+
+    public String getTipoPeido() {
+        return tipoPeido;
+    }
 
     public String getIdPedido() {
         return idPedido;
@@ -31,6 +38,11 @@ public abstract class Pedido extends ControladorDeEnvios {
     }
 
     //SETTERS
+
+
+    public void setTipoPeido(String tipoPeido) {
+        this.tipoPeido = tipoPeido;
+    }
 
     public void setDireccionEntrega(String direccionEntrega) {
         this.direccionEntrega = direccionEntrega;
@@ -51,7 +63,6 @@ public abstract class Pedido extends ControladorDeEnvios {
 
     //OVERRIDE
 
-
     public void asignarRepartidor(){
         System.out.println("El pedido ha sido asignado");
     }
@@ -68,14 +79,13 @@ public abstract class Pedido extends ControladorDeEnvios {
     //INTERFACES
 
 
-    @Override
-    public void despachar() {
-        System.out.println("El pedido fue despachado correctamente");
-    }
+   public abstract void despachar();
 
 
     @Override
     public void cancelar(ArrayList<Pedido> list, String id) {
+
+        System.out.println("====== CANCELANDO PEDIDO ======");
 
         for(int i = 0 ; i < list.size(); i++){
             if(list.get(i).getIdPedido() == id){
@@ -84,35 +94,28 @@ public abstract class Pedido extends ControladorDeEnvios {
             }
         }
 
-        System.out.println("Pedido cancelado correctamente");
 
     }
 
     @Override
     public void verHistorial(ArrayList<Pedido> list) {
 
-        for (int i = 0 ; i < list.size(); i++){
-            System.out.println("Pedido: " + list.get(i).getIdPedido() + "entregado por - "  );
-        }
+        System.out.println("====== HISTORIAL PEDIDOS ======");
 
 
     }
 
 
 
-
-
-    public void mostrarResumen() {
-        System.out.println(
+    @Override
+    public String toString(){
+        return
                 "======== RESUMEN PEDIDO ========" +
+                        "\nTipo pedido: " + tipoPeido +
                         "\nID pedido: " + idPedido +
                         "\nDirreccion entrega: " + direccionEntrega +
-                        "\nDistancia en KM: " + distanciaKM
-        );
+                        "\nDistancia en KM: " + distanciaKM;
     }
-
-
-
 
 
 

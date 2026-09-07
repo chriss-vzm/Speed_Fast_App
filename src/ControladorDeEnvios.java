@@ -3,6 +3,9 @@ import java.util.ArrayList;
 public class ControladorDeEnvios implements Despachable,Cancelable,Rastreable{
 
 
+    private ArrayList<Pedido> pedidoArrayList = new ArrayList<>();
+
+
     @Override
     public void despachar() {
 
@@ -18,4 +21,16 @@ public class ControladorDeEnvios implements Despachable,Cancelable,Rastreable{
     public void verHistorial(ArrayList<Pedido> lista) {
 
     }
+
+
+    public void agregarLista(Pedido pedido){
+
+    }
+
+
+
+
+
+
+
 }

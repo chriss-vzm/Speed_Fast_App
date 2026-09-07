@@ -1,11 +1,48 @@
+import java.util.ArrayList;
+
 public class PedidoExpress extends Pedido{
 
 
-    public PedidoExpress(String idPedido, String direccionEntrega, String distanciaKM){
+    public PedidoExpress(String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM){
 
-        super(idPedido, direccionEntrega, distanciaKM);
+        super(tipoPedido, idPedido, direccionEntrega, distanciaKM);
 
     }
+
+
+    //INTERFACES
+
+    @Override
+    public void despachar() {
+
+        System.out.println("Despachando pedido EXPRESS... ");
+    }
+
+    @Override
+    public void cancelar(ArrayList<Pedido> list, String id) {
+        super.cancelar(list, id);
+
+        System.out.println("Pedido: " + id + " de tipo EXPRESS cancelado");
+    }
+
+
+    @Override
+    public void verHistorial(ArrayList<Pedido> list) {
+
+        super.verHistorial(list);
+
+        for (Pedido pedido : list){
+            if(pedido.getTipoPeido() == "Express"){
+                System.out.println(pedido);
+            }
+        }
+
+
+    }
+
+
+
+
 
 
 

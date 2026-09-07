@@ -1,11 +1,46 @@
+import java.util.ArrayList;
+
 public class PedidoComida extends Pedido  {
 
 
 
 
-    public PedidoComida(String idPedido, String direccionEntrega, String distanciaKM) {
+    public PedidoComida(String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM) {
 
-        super(idPedido, direccionEntrega, distanciaKM);
+        super(tipoPedido, idPedido, direccionEntrega, distanciaKM);
+
+    }
+
+
+
+    //INTERFACES
+
+    @Override
+    public void despachar() {
+
+        System.out.println("Despachando pedido COMIDA... ");
+
+    }
+
+    @Override
+    public void cancelar(ArrayList<Pedido> list, String id) {
+        super.cancelar(list, id);
+
+        System.out.println("Pedido: " + id + " de tipo COMIDA cancelado");
+    }
+
+
+    @Override
+    public void verHistorial(ArrayList<Pedido> list) {
+
+        super.verHistorial(list);
+
+        for (Pedido pedido : list){
+            if(pedido.getTipoPeido() == "Comida"){
+                System.out.println(pedido);
+            }
+        }
+
 
     }
 
@@ -18,6 +53,7 @@ public class PedidoComida extends Pedido  {
         System.out.println("El pedido ha sido asignado de tipo COMIDA");
 
     }
+
 
 
     @Override
