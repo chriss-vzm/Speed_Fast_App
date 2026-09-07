@@ -88,7 +88,7 @@ public abstract class Pedido implements Despachable, Cancelable, Rastreable{
         System.out.println("====== CANCELANDO PEDIDO ======");
 
         for(int i = 0 ; i < list.size(); i++){
-            if(list.get(i).getIdPedido() == id){
+            if(list.get(i).getIdPedido().equals(id)){
                 list.remove(i);
                 break;
             }

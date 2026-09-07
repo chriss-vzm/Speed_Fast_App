@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main {
     public static void main(String[] args) {
 
-        ArrayList<Pedido> arregloPedido = new ArrayList<>();
-
-
-
         Scanner sc = new Scanner(System.in);
+
+
+        ArrayList<Pedido> arregloPedidos = new ArrayList<>();
+        BlockingQueue<Pedido> colaPedidos  = new LinkedBlockingQueue<>(5);
+
+
 
 
         //CREACION DE PEDIDOS
@@ -45,10 +49,10 @@ public class Main {
 
 
 
-        arregloPedido.add(pedidoComida);
-        arregloPedido.add(pedidoComida2);
-        arregloPedido.add(pedidoEncomienda);
-        arregloPedido.add(pedidoExpress);
+        arregloPedidos.add(pedidoComida);
+        arregloPedidos.add(pedidoComida2);
+        arregloPedidos.add(pedidoEncomienda);
+        arregloPedidos.add(pedidoExpress);
 
 
 
@@ -84,13 +88,16 @@ public class Main {
 
 
 
-        pedidoComida.verHistorial(arregloPedido);
+        pedidoComida.verHistorial(arregloPedidos);
 
 
 
 
 
 
+        ProductorPedidos productorPedidos = new ProductorPedidos(arregloPedidos,colaPedidos);
+        Repartidor repartidor1 = new Repartidor(colaPedidos);
+        Repartidor repartidor2 = new Repartidor(colaPedidos);
 
 
 
