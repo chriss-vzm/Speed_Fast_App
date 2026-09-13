@@ -7,15 +7,27 @@ public abstract class Pedido implements Despachable, Cancelable, Rastreable{
     private String idPedido;
     private String direccionEntrega;
     private String distanciaKM;
+    private estadoPedido estado;
+
+
+
+
+    public enum estadoPedido{
+        PENDIENTE,
+        EN_REPARTO,
+        ENTREGADO
+    }
 
 
     //CONSTRUCTOR
 
-    public Pedido (String tipoPeido,String idPedido, String direccionEntrega, String distanciaKM){
+    public Pedido (String tipoPeido,String idPedido, String direccionEntrega, String distanciaKM,estadoPedido estado){
         this.tipoPeido = tipoPeido;
         this.idPedido = idPedido;
         this.direccionEntrega = direccionEntrega;
         this.distanciaKM = distanciaKM;
+        this.estado = estado;
+
     }
 
     //GETTERS
@@ -37,6 +49,10 @@ public abstract class Pedido implements Despachable, Cancelable, Rastreable{
         return distanciaKM;
     }
 
+    public estadoPedido getEstado() {
+        return estado;
+    }
+
     //SETTERS
 
 
@@ -54,6 +70,10 @@ public abstract class Pedido implements Despachable, Cancelable, Rastreable{
 
     public void setDistanciaKM(String distanciaKM) {
         this.distanciaKM = distanciaKM;
+    }
+
+    public void setEstado(estadoPedido estado) {
+        this.estado = estado;
     }
 
     //METODO ABSTRACTO
@@ -79,7 +99,9 @@ public abstract class Pedido implements Despachable, Cancelable, Rastreable{
     //INTERFACES
 
 
-   public abstract void despachar();
+   public void despachar(){
+       System.out.println("Despachando...");
+   }
 
 
     @Override

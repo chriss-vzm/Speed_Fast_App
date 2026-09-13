@@ -26,7 +26,7 @@ El proyecto está compuesto por las siguientes clases e interfaces:
 - `PedidoComida`: representa pedidos de comida.
 - `PedidoEncomienda`: representa pedidos de encomienda.
 - `PedidoExpress`: representa pedidos express.
-- `ProductorPedidos`: obtiene los pedidos almacenados y los incorpora a una `BlockingQueue`.
+- `ZonaDeCarga`: obtiene los pedidos almacenados y los incorpora a una `BlockingQueue`.
 - `Repartidor`: representa a un repartidor y ejecuta las entregas mediante `Runnable`.
 - `Main`: clase principal encargada de crear los pedidos, repartidores y ejecutar las tareas concurrentes.
 
@@ -48,7 +48,7 @@ Para la simulación de las entregas se utilizan herramientas de concurrencia de 
 - `Thread.sleep()`
 - `Random`
 
-Los pedidos son almacenados inicialmente en un `ArrayList` y posteriormente son incorporados a una `BlockingQueue` mediante `ProductorPedidos`.
+Los pedidos son almacenados inicialmente en un `ArrayList` y posteriormente son incorporados a una `BlockingQueue` mediante `ZonaDeCarga`.
 
 Los repartidores toman los pedidos desde la cola y simulan su proceso de entrega.
 
@@ -60,7 +60,7 @@ El programa utiliza `ExecutorService` para ejecutar simultáneamente al producto
 ArrayList<Pedido>
        |
        v
-ProductorPedidos
+ZonaDeCarga
        |
        | put()
        v

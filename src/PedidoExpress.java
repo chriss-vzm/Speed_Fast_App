@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class PedidoExpress extends Pedido{
 
 
-    public PedidoExpress(String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM){
+    public PedidoExpress(String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM,estadoPedido estado){
 
-        super(tipoPedido, idPedido, direccionEntrega, distanciaKM);
+        super(tipoPedido, idPedido, direccionEntrega, distanciaKM, estado);
 
     }
 
@@ -15,7 +15,7 @@ public class PedidoExpress extends Pedido{
     @Override
     public void despachar() {
 
-        System.out.println("Despachando pedido EXPRESS... ");
+        System.out.println("Pedido de tipo EXPRESS despachado");
     }
 
     @Override

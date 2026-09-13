@@ -21,11 +21,15 @@ public class Repartidor implements Runnable{
     @Override
     public void run() {
 
-        while(!listaPedidos.isEmpty()){
+        while(true){
 
             try {
 
                 Pedido pedido = listaPedidos.take();
+
+                if(pedido instanceof PoisonPill){
+                    break;
+                }
 
                 System.out.println("Repartidor |" + nombreRepartidor + "| entregando pedido |" + pedido.getIdPedido() + "|");
 
@@ -38,7 +42,7 @@ public class Repartidor implements Runnable{
 
 
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                Thread.currentThread().interrupt();
             }
 
 

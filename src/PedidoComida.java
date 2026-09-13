@@ -5,9 +5,9 @@ public class PedidoComida extends Pedido  {
 
 
 
-    public PedidoComida(String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM) {
+    public PedidoComida(String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM, estadoPedido estado) {
 
-        super(tipoPedido, idPedido, direccionEntrega, distanciaKM);
+        super(tipoPedido, idPedido, direccionEntrega, distanciaKM, estado);
 
     }
 
@@ -18,7 +18,7 @@ public class PedidoComida extends Pedido  {
     @Override
     public void despachar() {
 
-        System.out.println("Despachando pedido COMIDA... ");
+        System.out.println("Pedido de tipo COMIDA despachado");
 
     }
 

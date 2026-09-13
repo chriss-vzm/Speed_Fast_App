@@ -4,9 +4,9 @@ public class PedidoEncomienda extends Pedido {
 
 
 
-    public PedidoEncomienda (String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM){
+    public PedidoEncomienda (String tipoPedido, String idPedido, String direccionEntrega, String distanciaKM,estadoPedido estado){
 
-        super(tipoPedido, idPedido, direccionEntrega,distanciaKM);
+        super(tipoPedido, idPedido, direccionEntrega,distanciaKM, estado);
 
     }
 
@@ -14,7 +14,7 @@ public class PedidoEncomienda extends Pedido {
     @Override
     public void despachar() {
 
-        System.out.println("Despachando pedido ENCOMIENDA... ");
+        System.out.println("Pedido de tipo ENCOMIENDA despachado");
     }
 
     @Override
@@ -38,9 +38,6 @@ public class PedidoEncomienda extends Pedido {
 
 
     }
-
-
-
 
 
 

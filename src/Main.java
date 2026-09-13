@@ -41,14 +41,16 @@ public class Main {
                 "Comida",
                 "#100",
                 "Pajaritos, La Cisterna",
-                "1"
+                "1",
+                Pedido.estadoPedido.EN_REPARTO
         );
 
         Pedido pedidoComida2 = new PedidoComida(
                 "Comida",
                 "#103",
                 "San Isidro, Santiago Centro",
-                "3"
+                "3",
+                Pedido.estadoPedido.EN_REPARTO
         );
 
 
@@ -56,7 +58,8 @@ public class Main {
                 "Encomienda",
                 "#101",
                 "Los Leones 314",
-                "4"
+                "4",
+                Pedido.estadoPedido.EN_REPARTO
 
         );
 
@@ -64,7 +67,8 @@ public class Main {
                 "Encomienda",
                 "#104",
                 "Av.Tobalaba 989",
-                "3"
+                "3",
+                Pedido.estadoPedido.EN_REPARTO
 
         );
 
@@ -72,8 +76,11 @@ public class Main {
                 "Express",
                 "#102",
                 "Cienfuegos 31, Los Heroes",
-                "2"
+                "2",
+                Pedido.estadoPedido.EN_REPARTO
         );
+
+
 
 
 
@@ -83,26 +90,29 @@ public class Main {
         arregloPedidos.add(pedidoEncomienda2);
         arregloPedidos.add(pedidoExpress);
 
+        //SEÑALES DE FINALIZACION
+
+        arregloPedidos.add(new PoisonPill());
+        arregloPedidos.add(new PoisonPill());
+        arregloPedidos.add(new PoisonPill());
 
 
 
-        executor.execute(new ProductorPedidos(arregloPedidos,colaPedidos));
+        executor.execute(new ZonaDeCarga(arregloPedidos,colaPedidos));
 
         executor.execute(new Repartidor(colaPedidos,nombre1));
         executor.execute(new Repartidor(colaPedidos,nombre2));
         executor.execute(new Repartidor(colaPedidos,nombre3));
 
 
-       executor.shutdown();
+        executor.shutdown();
 
 
-
-
-
-
-
-
-
+        try{
+            executor.awaitTermination(1,TimeUnit.MINUTES);
+        }catch (InterruptedException e){
+            executor.shutdown();
+        }
 
 
 
